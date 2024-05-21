@@ -54,8 +54,8 @@ def main():
     }
     last_command=''
     while True:
-        print("""
-+command=callback=========================+
+        print( \
+"""+command=callback=========================+
 |o      |open data file of today          |
 |h      |handle text of info              |
 |t      |push text of info                |
@@ -66,8 +66,7 @@ def main():
 |r      |total info of date range         |
 |rc     |total info of date range and copy|
 |q      |quit                             |
-+command=callback=========================+
-        """)
++command=callback=========================+""")
         print(f"last command> {last_command}")
         command=input("input command> ")
         command=ext_string.remove_blank(command)

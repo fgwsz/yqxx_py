@@ -18,7 +18,7 @@ def url_pattern():
 
 #处理失败返回None
 def input_handle():
-    #读取输入
+    #读取输入文件
     input_content=ext_file.read_content(config.input_file_path())
     print(f'input content:\n{input_content}')
     if ext_string.is_blank(input_content):
@@ -74,4 +74,6 @@ def input_handle():
     #复制结果到剪切板
     pyperclip.copy(handle_result)
 
+    #清空输入文件
+    ext_file.write_content(config.input_file_path(),'')
     return True

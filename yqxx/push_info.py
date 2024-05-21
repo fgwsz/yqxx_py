@@ -1,6 +1,5 @@
 # -*- coding:utf-8 -*-
 import os
-import shutil
 import docx
 import pyperclip
 from PIL import ImageGrab
