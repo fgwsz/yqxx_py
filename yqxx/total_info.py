@@ -46,7 +46,7 @@ def total_info(today_flag=False,paste_flag=False):
     if today_flag:
         begin_date=ext_date.today_date()
         finish_date=ext_date.today_date()
-        files=[config.data_file_path_of_today()]
+        files=[ext_date.today_date()+'.docx']
     else:
         begin_date=ext_date.input_date('请输入开始日期')
         finish_date=ext_date.input_date('请输入截止日期')
