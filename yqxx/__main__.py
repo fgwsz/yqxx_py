@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-import os
+from yqxx import ext_file
 from yqxx import common
 from yqxx import input_handle
 from yqxx import push_info
@@ -10,7 +10,7 @@ from yqxx import ext_string
 
 def _open_data_file_of_today():
     common.data_file_of_today_create()
-    os.startfile(config.data_file_path_of_today())
+    ext_file.startfile(config.data_file_path_of_today())
 
 def _handle_text_of_info():
     input_handle.input_handle()
