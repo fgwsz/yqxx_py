@@ -3,9 +3,6 @@ import os
 import docx
 import pyperclip
 import platform
-import subprocess
-from PIL import Image
-from io import BytesIO
 from yqxx import config
 from yqxx import common
 
@@ -36,14 +33,6 @@ def image_grabclipboard_and_save(image_path):
             image.save(image_path,'PNG')
             ret=True
     return ret
-
-def image_save(image,image_path,ext):
-    if system_type=='Linux':
-        import pyscreenshot
-        image.save(image_path,ext)
-    else:
-        from PIL import ImageGrab
-        image.save(image_path,ext)
 
 def push_text_of_info(index_of_table=0):
     common.data_file_of_today_create()

@@ -6,5 +6,5 @@ git add ./input.txt
 git add ./*.sh
 git add ./*.ps1
 read -p "Input Git Commit Info: " commit_info
-git commit -m $commit_info
+git commit -m "$commit_info"
 git push
