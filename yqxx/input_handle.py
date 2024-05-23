@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
 import re
 import webbrowser
-import platform
 import subprocess
 import pyperclip
 from yqxx import config
@@ -71,13 +70,7 @@ def input_handle(is_from_input_file=True):
     title=ext_string.remove_all(title,r'摘要：\S*')
 
     #打开链接
-    system=platform.system()
-    if system=='Windows':
-        webbrowser.open(url)
-    elif system=='Linux':
-        subprocess.Popen(['xdg-open',url])
-    else:
-        raise NotImplementedError(f'Unsupported platform: {system}')
+    webbrowser.open(url)
 
     #拼接得到处理结果
     handle_result= \
