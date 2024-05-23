@@ -13,28 +13,32 @@ def _open_data_file_of_today():
     ext_file.startfile(config.data_file_path_of_today())
 
 def _handle_text_of_info():
-    input_handle.input_handle()
+    return input_handle.input_handle(False)
 
 def _push_text_of_info():
-    push_info.push_text_of_info()
+    return push_info.push_text_of_info()
+
+def _handle_and_push_text_of_info():
+    if _handle_text_of_info():
+        _push_text_of_info()
 
 def _push_image_of_info():
-    push_info.push_image_of_info()
+    return push_info.push_image_of_info()
 
 def _pop_info():
-    pop_info.pop_info()
+    return pop_info.pop_info()
 
 def _total_info_of_today():
-    total_info.total_info(True,False)
+    return total_info.total_info(True,False)
 
 def _total_info_of_today_and_copy():
-    total_info.total_info(True,True)
+    return total_info.total_info(True,True)
 
 def _total_info_of_date_range():
-    total_info.total_info(False,False)
+    return total_info.total_info(False,False)
 
 def _total_info_of_date_range_and_copy():
-    total_info.total_info(False,True)
+    return total_info.total_info(False,True)
 
 def _quit():
     exit()
@@ -44,6 +48,7 @@ def main():
         'o' :_open_data_file_of_today,
         'h' :_handle_text_of_info,
         't' :_push_text_of_info,
+        'ht':_handle_and_push_text_of_info,
         'i' :_push_image_of_info,
         'd' :_pop_info,
         'tt':_total_info_of_today,
@@ -59,6 +64,7 @@ def main():
 |o      |open data file of today          |
 |h      |handle text of info              |
 |t      |push text of info                |
+|ht     |handle and push text of info     |
 |i      |push image of info               |
 |d      |pop info                         |
 |tt     |total info of today              |

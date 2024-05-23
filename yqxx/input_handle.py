@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 import re
 import webbrowser
+import platform
+import subprocess
 import pyperclip
 from yqxx import config
 from yqxx import ext_file
@@ -17,9 +19,14 @@ def url_pattern():
     return g_url_pattern
 
 #处理失败返回None
-def input_handle():
-    #读取输入文件
-    input_content=ext_file.read_content(config.input_file_path())
+def input_handle(is_from_input_file=True):
+    if is_from_input_file:
+        #从输入文件读取输入
+        input_content=ext_file.read_content(config.input_file_path())
+    else:
+        #从剪切板读取输入
+        input_content=pyperclip.paste()
+
     print(f'input content:\n{input_content}')
     if ext_string.is_blank(input_content):
         print('input file content is blank!')
@@ -64,7 +71,13 @@ def input_handle():
     title=ext_string.remove_all(title,r'摘要：\S*')
 
     #打开链接
-    webbrowser.open(url)
+    system=platform.system()
+    if system=='Windows':
+        webbrowser.open(url)
+    elif system=='Linux':
+        subprocess.Popen(['xdg-open',url])
+    else:
+        raise NotImplementedError(f'Unsupported platform: {system}')
 
     #拼接得到处理结果
     handle_result= \
@@ -75,5 +88,7 @@ def input_handle():
     pyperclip.copy(handle_result)
 
     #清空输入文件
-    ext_file.write_content(config.input_file_path(),'')
+    if is_from_input_file:
+        ext_file.write_content(config.input_file_path(),'')
+
     return True
