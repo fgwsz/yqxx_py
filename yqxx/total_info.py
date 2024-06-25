@@ -42,16 +42,8 @@ def count_docx_info(file_path):
             row+=1
     return ret
 
-def total_info(today_flag=False,paste_flag=False):
-    if today_flag:
-        begin_date=ext_date.today_date()
-        finish_date=ext_date.today_date()
-        files=[ext_date.today_date()+'.docx']
-    else:
-        begin_date=ext_date.input_date('请输入开始日期')
-        finish_date=ext_date.input_date('请输入截止日期')
-        files=data_file_list_in_date_range(begin_date,finish_date)
-
+def total_info_impl(begin_date,finish_date,paste_flag):
+    files=data_file_list_in_date_range(begin_date,finish_date)
     count=[0,0]
     for file in files:
         file_count=count_docx_info(config.data_dir_path()+'/'+file)
@@ -69,3 +61,29 @@ def total_info(today_flag=False,paste_flag=False):
     print(text)
     if paste_flag:
         pyperclip.copy(text)
+
+class TotalFlag:
+    today_=0
+    current_week_=1
+    current_month_=2
+    current_year_=3
+    range_=4
+
+def total_info(total_flag,paste_flag):
+    if total_flag==TotalFlag.today_:
+        begin_date=ext_date.today_date()
+        finish_date=ext_date.today_date()
+    elif total_flag==TotalFlag.current_week_:
+        begin_date=ext_date.current_week_first_day_date()
+        finish_date=ext_date.current_week_last_day_date()
+    elif total_flag==TotalFlag.current_month_:
+        begin_date=ext_date.current_month_first_day_date()
+        finish_date=ext_date.current_month_last_day_date()
+    elif total_flag==TotalFlag.current_year_:
+        begin_date=ext_date.current_year_first_day_date()
+        finish_date=ext_date.current_year_last_day_date()
+    elif total_flag==TotalFlag.range_:
+        begin_date=ext_date.input_date('请输入开始日期')
+        finish_date=ext_date.input_date('请输入截止日期')
+
+    total_info_impl(begin_date,finish_date,paste_flag)
