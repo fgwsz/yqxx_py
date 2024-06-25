@@ -12,6 +12,8 @@ from yqxx import common
 def data_file_list_in_date_range(start_date,end_date):
     start_date=datetime.datetime.strptime(start_date,ext_date.date_format())
     end_date=datetime.datetime.strptime(end_date,ext_date.date_format())
+    if start_date>end_date:
+        return []
     file_list=[]
     for file in os.listdir(config.data_dir_path()):
         if file.endswith('.docx')and re.match(r'\d{8}',file):
@@ -52,7 +54,7 @@ def total_info_impl(begin_date,finish_date,paste_flag):
             count[1]+=file_count[1]
 
     if begin_date==finish_date:
-        text=f'{ext_date.today_date()}报送情况统计\n'
+        text=f'{begin_date}报送情况统计\n'
     else:
         text=f'区间日期[{begin_date},{finish_date}]报送情况统计\n'
 
