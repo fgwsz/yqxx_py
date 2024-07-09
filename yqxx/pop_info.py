@@ -26,4 +26,4 @@ def pop_info(index_of_table=0):
         cell._element.remove(paragraphs[-1]._element)
         del paragraphs[-1]
     document.save(config.data_file_path_of_today())
-    print(f"{config.data_dir_path()} table[{index_of_table}] index[{cell_row-1}] 清空成功!")
+    print(f"{config.data_file_path_of_today()} table[{index_of_table}] index[{cell_row-1}] 清空成功!")
