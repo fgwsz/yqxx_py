@@ -26,15 +26,14 @@ def input_handle(is_from_input_file=True):
         #从剪切板读取输入
         input_content=pyperclip.paste()
 
-    print(f'input content:\n{input_content}')
     if ext_string.is_blank(input_content):
-        print('[FAIL] [INPUT_HANDLE]: input file content is blank!')
+        print('[FAIL][INPUT_HANDLE]: input file content is blank!')
         return False
 
     #提取链接
     url=ext_string.match_first(input_content,url_pattern())
     if ext_string.is_blank(url):
-        print('[FAIL] [INPUT_HANDLE]: url not found!')
+        print('[FAIL][INPUT_HANDLE]: url not found!')
         return False
 
     #把剩下的部分作为标题
@@ -76,7 +75,7 @@ def input_handle(is_from_input_file=True):
     handle_result= \
         location+' : '+title+'\n'+ \
         url
-    print(f'input handle result:\n{handle_result}')
+    print(f'[PASS][INPUT_HANDLE][RESULT]\n{handle_result}')
     #复制结果到剪切板
     pyperclip.copy(handle_result)
 
