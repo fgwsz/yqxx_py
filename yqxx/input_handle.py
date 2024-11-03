@@ -28,13 +28,13 @@ def input_handle(is_from_input_file=True):
 
     print(f'input content:\n{input_content}')
     if ext_string.is_blank(input_content):
-        print('input file content is blank!')
+        print('[FAIL] [INPUT_HANDLE]: input file content is blank!')
         return False
 
     #提取链接
     url=ext_string.match_first(input_content,url_pattern())
     if ext_string.is_blank(url):
-        print('url not found!')
+        print('[FAIL] [INPUT_HANDLE]: url not found!')
         return False
 
     #把剩下的部分作为标题

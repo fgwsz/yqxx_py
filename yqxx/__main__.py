@@ -104,11 +104,14 @@ def main():
 |q      |quit                                |
 +command=callback============================+""")
         print(f"last command> {last_command}")
+        #print(f"white list: {push_info.yqxx_white_list}")
         command=input("input command> ")
         command=ext_string.remove_blank(command)
         last_command=command
         if command in callback_dict:
             callback_dict[command]()
+        print("Press Enter to continue...")
+        input()
 
 if __name__=='__main__':
     main()
