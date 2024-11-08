@@ -63,6 +63,7 @@ def total_info_impl(begin_date,finish_date,paste_flag):
     print(text)
     if paste_flag:
         pyperclip.copy(text)
+    return True
 
 class TotalFlag:
     today_=0
@@ -89,3 +90,4 @@ def total_info(total_flag,paste_flag):
         finish_date=ext_date.input_date('请输入截止日期')
 
     total_info_impl(begin_date,finish_date,paste_flag)
+    return True

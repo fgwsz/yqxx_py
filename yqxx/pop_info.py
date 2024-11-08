@@ -10,7 +10,7 @@ def pop_info(index_of_table=0):
     cell_row=common.count_non_empty_cells_in_column(table,cell_col)
     if(cell_row==0):
         print(f"[FAIL][POP_INFO]: no data!")
-        return
+        return False
     cell=table.cell(cell_row-1,cell_col)
     # 清空单元格中的所有内容
     for paragraph in cell.paragraphs:
@@ -28,3 +28,4 @@ def pop_info(index_of_table=0):
         del paragraphs[-1]
     document.save(config.data_file_path_of_today())
     print(f"[PASS][POP_INFO]: {config.data_file_path_of_today()} table[{index_of_table}] index[{cell_row-1}]")
+    return True

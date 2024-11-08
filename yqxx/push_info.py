@@ -56,12 +56,12 @@ def push_text_of_info(index_of_table=0):
     for location_item in yqxx_white_list:
         if location_item in clipboard_text:
             print(f'[FAIL][PUSH_TEXT]: white list \'{location_item}\' info!')
-            input_flag=False
+            return False
 
-    if input_flag:
-        cell.text=clipboard_text
-        document.save(config.data_file_path_of_today())
-        print(f'[PASS][PUSH_TEXT]: {config.data_file_path_of_today()} table[{index_of_table}] index[{cell_row}]')
+    cell.text=clipboard_text
+    document.save(config.data_file_path_of_today())
+    print(f'[PASS][PUSH_TEXT]: {config.data_file_path_of_today()} table[{index_of_table}] index[{cell_row}]')
+    return True
 
 def push_image_of_info(index_of_table=0):
     common.data_file_of_today_create()
@@ -84,3 +84,4 @@ def push_image_of_info(index_of_table=0):
     if os.path.exists(image_path):
         os.remove(image_path)
     print(f'[PASS][PUSH_IMAGE]: {config.data_file_path_of_today()} table[{index_of_table}] index[{cell_row-1}]')
+    return True

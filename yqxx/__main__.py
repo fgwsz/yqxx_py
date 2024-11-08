@@ -11,6 +11,7 @@ from yqxx import ext_string
 def _open_data_file_of_today():
     common.data_file_of_today_create()
     ext_file.startfile(config.data_file_path_of_today())
+    return True
 
 def _handle_text_of_info():
     return input_handle.input_handle(False)
@@ -20,7 +21,9 @@ def _push_text_of_info():
 
 def _handle_and_push_text_of_info():
     if _handle_text_of_info():
-        _push_text_of_info()
+        return _push_text_of_info()
+    else:
+        return False
 
 def _push_image_of_info():
     return push_info.push_image_of_info()
@@ -29,34 +32,44 @@ def _pop_info():
     return pop_info.pop_info()
 
 def _total_info_of_today():
-    return total_info.total_info(total_info.TotalFlag.today_,False)
+    total_info.total_info(total_info.TotalFlag.today_,False)
+    return False
 
 def _total_info_of_today_and_copy():
-    return total_info.total_info(total_info.TotalFlag.today_,True)
+    total_info.total_info(total_info.TotalFlag.today_,True)
+    return False
 
 def _total_info_of_current_week():
-    return total_info.total_info(total_info.TotalFlag.current_week_,False)
+    total_info.total_info(total_info.TotalFlag.current_week_,False)
+    return False
 
 def _total_info_of_current_week_and_copy():
-    return total_info.total_info(total_info.TotalFlag.current_week_,True)
+    total_info.total_info(total_info.TotalFlag.current_week_,True)
+    return False
 
 def _total_info_of_current_month():
-    return total_info.total_info(total_info.TotalFlag.current_month_,False)
+    total_info.total_info(total_info.TotalFlag.current_month_,False)
+    return False
 
 def _total_info_of_current_month_and_copy():
-    return total_info.total_info(total_info.TotalFlag.current_month_,True)
+    total_info.total_info(total_info.TotalFlag.current_month_,True)
+    return False
 
 def _total_info_of_current_year():
-    return total_info.total_info(total_info.TotalFlag.current_year_,False)
+    total_info.total_info(total_info.TotalFlag.current_year_,False)
+    return False
 
 def _total_info_of_current_year_and_copy():
-    return total_info.total_info(total_info.TotalFlag.current_year_,True)
+    total_info.total_info(total_info.TotalFlag.current_year_,True)
+    return False
 
 def _total_info_of_date_range():
-    return total_info.total_info(total_info.TotalFlag.range_,False)
+    total_info.total_info(total_info.TotalFlag.range_,False)
+    return False
 
 def _total_info_of_date_range_and_copy():
-    return total_info.total_info(total_info.TotalFlag.range_,True)
+    total_info.total_info(total_info.TotalFlag.range_,True)
+    return False
 
 def _quit():
     exit()
@@ -82,6 +95,7 @@ def main():
         'q' :_quit
     }
     last_command=''
+    callback_result=False
     while True:
         print( \
 """+command=callback============================+
@@ -104,14 +118,15 @@ def main():
 |q      |quit                                |
 +command=callback============================+""")
         print(f"last command> {last_command}")
-        #print(f"white list: {push_info.yqxx_white_list}")
+        print(f"white list: {push_info.yqxx_white_list}")
         command=input("input command> ")
         command=ext_string.remove_blank(command)
         last_command=command
         if command in callback_dict:
-            callback_dict[command]()
-        print("Press Enter to continue...")
-        input()
+            callback_result=callback_dict[command]()
+        if not callback_result:
+            print("Press Enter to continue...")
+            input()
 
 if __name__=='__main__':
     main()
